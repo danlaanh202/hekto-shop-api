@@ -1,0 +1,7 @@
+echo "# hekto-shop-api" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/danlaanh202/hekto-shop-api.git
+git push -u origin main

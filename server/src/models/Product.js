@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ProductSchema = new mongoose.schema({
-  title: {
+  productName: {
     type: String,
     required: true,
   },
@@ -8,13 +8,20 @@ const ProductSchema = new mongoose.schema({
     type: Number,
     required: true,
   },
-  description: {
-    type: String,
-    required: true,
+  brand: {
+    type: String, //Default: the shop which sell this product
   },
   categories: {
     type: String, //temporary, use reference later
     required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    default: 0,
   },
   size: {
     type: String,
