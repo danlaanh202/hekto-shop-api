@@ -13,6 +13,7 @@ class AuthController {
     });
     try {
       const savedUser = await newUser.save();
+      // console.log(savedUser)
       return res.status(201).json(savedUser);
     } catch (err) {
       return res.status(500).json(err);
@@ -20,6 +21,7 @@ class AuthController {
   }
   async login(req, res, next) {
     try {
+      console.log("asdasdsad");
       const user = await User.findOne({ username: req.body.username });
       if (!user) return res.status(404).json("No user Found");
 
@@ -44,6 +46,7 @@ class AuthController {
 
       return res.status(200).json({ ...others, accessToken });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(err);
     }
   }

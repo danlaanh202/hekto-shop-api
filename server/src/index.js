@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const { authRoute } = require("./routes");
 const route = require("./routes");
+const Product = require("./models/Product");
 
 dotenv.config();
 
@@ -21,6 +22,12 @@ mongoose
   });
 
 route(app);
+// Product.findOne({ title: "Cantilever Chair" })
+//   .populate("seller")
+//   .exec(function (err, seller) {
+//     if (err) return handleError(err);
+//     console.log(seller);
+//   });
 
 app.listen(process.env.PORT, () => {
   console.log("Hello world");

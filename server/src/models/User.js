@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      unique: true,
+      // unique: true,
     },
     isUpdateInformation: {
       type: Boolean,

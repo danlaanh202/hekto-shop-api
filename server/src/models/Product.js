@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
-const ProductSchema = new mongoose.schema({
+const Schema = mongoose.Schema;
+const ProductSchema = new Schema({
   productName: {
     type: String,
     required: true,
   },
+  seller: [
+    {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+  ],
   price: {
     type: Number,
     required: true,
@@ -11,10 +19,10 @@ const ProductSchema = new mongoose.schema({
   brand: {
     type: String, //Default: the shop which sell this product
   },
-  categories: {
-    type: String, //temporary, use reference later
-    required: true,
-  },
+  // categories: {
+  //   type: String, //temporary, use reference later
+  //   required: true,
+  // },
   description: {
     type: String,
     required: true,
@@ -26,12 +34,20 @@ const ProductSchema = new mongoose.schema({
   size: {
     type: String,
   },
+  soldAmount: {
+    type: Number,
+    default: 0,
+  },
+  isFeatured: {
+    type: Boolean,
+    default: false,
+  },
   tags: {
     type: String,
   },
   productImage: {
     type: String, //url
-    required: true,
+    // required: true,
   },
   productSmallImage: {
     type: String, //url
