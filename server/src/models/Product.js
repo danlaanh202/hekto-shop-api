@@ -5,13 +5,12 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  seller: [
-    {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
-  ],
+  seller: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+
   price: {
     type: Number,
     required: true,
@@ -47,7 +46,7 @@ const ProductSchema = new Schema({
   },
   productImage: {
     type: String, //url
-    // required: true,
+    required: true,
   },
   productSmallImage: {
     type: String, //url
