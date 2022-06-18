@@ -38,6 +38,17 @@ class ProductController {
       return res.status(500).json(err);
     }
   }
+  async getProductByIds(req,res,next) {
+    console.log(req.body.productIds)
+    try {
+     let newIds = req.body.productIds.map((item, index )=> stringToMongoId(item))
+      
+      const product = await Product.find({_id : {$in: newIds}})
+      return res.status(200).json(product)
+    }catch(err) {
+      return res.status(500).json(err)
+    }
+  }
   async getFeatureProducts(req, res, next) {
     try {
       const products = await Product.find({ isFeatured: true });
