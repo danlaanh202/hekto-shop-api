@@ -17,10 +17,10 @@ class ProductController {
     try {
       const savedProduct = await newProduct.save();
       // await Category.findOneAndUpdate({_id: stringToMongoId(req.body.category)}, {$push: {productIds: savedProduct._id}})
-      // console.log(savedProduct)
+      
       return res.status(201).json(savedProduct);
     } catch (err) {
-      console.log(newProduct)
+      // console.log(newProduct)
       return res.status(500).json(err);
     }
   }
