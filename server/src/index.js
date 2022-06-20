@@ -7,10 +7,12 @@ const { authRoute } = require("./routes");
 const route = require("./routes");
 const Product = require("./models/Product");
 
+
 dotenv.config();
 
 app.use(cors());
 app.use(express.json());
+
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -22,6 +24,7 @@ mongoose
   });
 
 route(app);
+
 // Product.findOne({ title: "Cantilever Chair" })
 //   .populate("seller")
 //   .exec(function (err, seller) {

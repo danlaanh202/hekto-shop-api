@@ -1,3 +1,4 @@
+const Category = require("../models/Category");
 const Product = require("../models/Product");
 const { stringToMongoId } = require("../utils/mongoose");
 
@@ -11,11 +12,15 @@ class ProductController {
       description: req.body.description,
       productImage: req.body.productImage,
       size: "XL",
+      categories: stringToMongoId(req.body.category),
     });
     try {
       const savedProduct = await newProduct.save();
+      // await Category.findOneAndUpdate({_id: stringToMongoId(req.body.category)}, {$push: {productIds: savedProduct._id}})
+      // console.log(savedProduct)
       return res.status(201).json(savedProduct);
     } catch (err) {
+      console.log(newProduct)
       return res.status(500).json(err);
     }
   }
@@ -31,7 +36,8 @@ class ProductController {
   async getProductById(req, res, next) {
     //get one product by id
     try {
-      const product = await Product.findById(req.params.id);
+      const product = await Product.findById(req.params.id)
+      .populate("seller").populate("categories")
       return res.status(200).json(product);
     } catch (err) {
       // console.log(err);
@@ -39,10 +45,9 @@ class ProductController {
     }
   }
   async getProductByIds(req,res,next) {
-    console.log(req.body.productIds)
+
     try {
      let newIds = req.body.productIds.map((item, index )=> stringToMongoId(item))
-      
       const product = await Product.find({_id : {$in: newIds}})
       return res.status(200).json(product)
     }catch(err) {
@@ -67,5 +72,6 @@ class ProductController {
       return res.status(500).json(err);
     }
   }
+
 }
 module.exports = new ProductController();

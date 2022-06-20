@@ -18,10 +18,10 @@ const ProductSchema = new Schema({
   brand: {
     type: String, //Default: the shop which sell this product
   },
-  // categories: {
-  //   type: String, //temporary, use reference later
-  //   required: true,
-  // },
+  categories: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+  },
   description: {
     type: String,
     required: true,
