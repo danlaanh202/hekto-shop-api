@@ -8,7 +8,7 @@ class ProductController {
       productName: req.body.productName,
       seller: stringToMongoId(req.body.seller),
       price: parseInt(req.body.price),
-      brand: req.body.brand,
+      brand: stringToMongoId(req.body.brand),
       description: req.body.description,
       productImage: req.body.productImage,
       size: "XL",
@@ -16,8 +16,8 @@ class ProductController {
     });
     try {
       const savedProduct = await newProduct.save();
-      // await Category.findOneAndUpdate({_id: stringToMongoId(req.body.category)}, {$push: {productIds: savedProduct._id}})
-      
+      await Category.findOneAndUpdate({_id: stringToMongoId(req.body.category)}, {$push: {productIds: savedProduct._id}})
+      console.log(savedProduct._id)
       return res.status(201).json(savedProduct);
     } catch (err) {
       // console.log(newProduct)
@@ -45,7 +45,6 @@ class ProductController {
     }
   }
   async getProductByIds(req,res,next) {
-
     try {
      let newIds = req.body.productIds.map((item, index )=> stringToMongoId(item))
       const product = await Product.find({_id : {$in: newIds}})
@@ -64,7 +63,6 @@ class ProductController {
   }
   async getProductWithQueryAndLimit(req, res, next) {
     let query = req.query.q;
-
     try {
       const products = await Product.find({}).limit(6);
       return res.status(200).json(products);

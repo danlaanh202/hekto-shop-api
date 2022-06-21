@@ -15,5 +15,6 @@ class SearchController {
       return res.status(500).json(err);
     }
   }
+  
 }
 module.exports = new SearchController();

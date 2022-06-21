@@ -16,7 +16,9 @@ const ProductSchema = new Schema({
     required: true,
   },
   brand: {
-    type: String, //Default: the shop which sell this product
+    type: Schema.Types.ObjectId,
+    ref: "Brand",
+    //Default: the shop which sell this product
   },
   categories: {
     type: Schema.Types.ObjectId,
